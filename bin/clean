@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+rm -Rf \
+  node_modules \
+  vendor \
+  var \
+  public/build \
+  public/bundles \
+  .env \
+  .env.prod.local;

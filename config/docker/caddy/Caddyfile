@@ -1,0 +1,14 @@
+{$URL:localhost}
+
+route {
+  root * /srv/app/public
+  php_fastcgi unix//var/run/php/php-fpm.sock
+  encode gzip
+  file_server
+}
+
+log {
+	output file /srv/app/var/log/caddy
+}
+
+tls ${ACME_EMAIL}

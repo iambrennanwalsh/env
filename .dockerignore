@@ -1,0 +1,12 @@
+var/
+public/bundles/
+public/build/
+node_modules/
+vendor/
+**/docker-compose.*.yml
+**/docker-compose.yml
+**/Dockerfile
+**/.dockerignore
+**/.DS_Store
+**/.git/
+**/.gitignore
