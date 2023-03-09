@@ -2,12 +2,16 @@ name: Continuous Deployment
 on:
   push:
     branches: [main]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Setup .env.local
+        run: echo APP_ENV=prod >> .env.local
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -33,6 +37,5 @@ jobs:
         env:
           SYMFONY_DECRYPTION_SECRET: ${{ secrets.SYMFONY_DECRYPTION_SECRET }}
         run: |
-          echo APP_ENV=prod >> .env.local
           php bin/console secrets:decrypt-to-local --force
           less .env.prod.local
