@@ -1,3 +1,6 @@
+.git/
+.vscode/
+.github/
 var/
 public/bundles/
 public/build/
@@ -6,7 +9,8 @@ vendor/
 **/docker-compose.*.yml
 **/docker-compose.yml
 **/Dockerfile
-**/.dockerignore
 **/.DS_Store
-**/.git/
 **/.gitignore
+**/.editorconfig
+**/README.md
+**/LICENSE

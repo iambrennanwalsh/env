@@ -1,0 +1,14 @@
+{$APP_URL:localhost}
+
+route {
+  root * /app/public
+  php_fastcgi unix//app/var/sock/php-fpm.sock
+  encode gzip
+  file_server
+}
+
+log {
+	output file /app/var/log/server
+}
+
+tls {$CADDY_TLS:internal}

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  database:
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+
+  app:
+    volumes:
+      - ./:/srv/app
+
+  server:
+    volumes:
+      - ./public:/srv/app/public:ro
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro

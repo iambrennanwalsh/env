@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "noEmit": true,
+    "paths": {
+      "@/*": ["assets/*"]
+    },
+    "resolveJsonModule": true,
+    "strict": true
+  }
+}

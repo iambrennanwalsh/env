@@ -1,0 +1,52 @@
+version: '3'
+services:
+  database:
+    image: postgres:alpine
+    env_file:
+      - .env
+      - .env.${APP_ENV}
+    ports:
+      - ${POSTGRES_PORT}
+
+  app:
+    build:
+      context: .
+      target: app_dev
+      dockerfile: .docker/Dockerfile
+    depends_on:
+      - database
+    env_file:
+      - .env
+      - .env.${APP_ENV}
+    volumes:
+      - Sockets:/var/run/sock
+
+  server:
+    build:
+      context: .
+      target: server_dev
+      dockerfile: .docker/Dockerfile
+    depends_on:
+      - app
+    env_file:
+      - .env
+      - .env.${APP_ENV}
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+      - target: 443
+        published: 443
+        protocol: tcp
+      - target: 443
+        published: 443
+        protocol: udp
+    volumes:
+      - Sockets:/var/run/sock
+      - CaddyData:/data
+      - CaddyConfig:/config
+
+volumes:
+  Sockets:
+  CaddyData:
+  CaddyConfig:
