@@ -4,6 +4,7 @@ services:
     image: postgres:alpine
     env_file:
       - .env
+      - .env.local
       - .env.${APP_ENV}
     ports:
       - ${POSTGRES_PORT}
@@ -17,6 +18,7 @@ services:
       - database
     env_file:
       - .env
+      - .env.local
       - .env.${APP_ENV}
     volumes:
       - Sockets:/var/run/sock
@@ -30,7 +32,9 @@ services:
       - app
     env_file:
       - .env
+      - .env.local
       - .env.${APP_ENV}
+
     ports:
       - target: 80
         published: 80

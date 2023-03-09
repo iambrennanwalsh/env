@@ -10,4 +10,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
       - name: Setup production environment.
+        env:
+          SYMFONY_DECRYPTION_SECRET: ${{ secrets.SYMFONY_DECRYPTION_SECRET }}
+        run: |
+          echo APP_ENV=prod >> .env.local
+          php bin/console secrets:decrypt-to-local --force
+          less .env.prod.local

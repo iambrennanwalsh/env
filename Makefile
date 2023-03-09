@@ -1,8 +1,22 @@
+ifneq (,$(wildcard ./.env))
+  include ./.env
+  export
+endif
 
-ENV	:= $(PWD)/.env
-include $(ENV)
-include $(ENV).$(APP_ENV)
-export
+ifneq (,$(wildcard ./.env.local))
+  include ./.env.local
+  export
+endif
+
+ifneq (,$(wildcard ./.env.$(APP_ENV)))
+  include ./.env.$(APP_ENV)
+  export
+endif
+
+ifneq (,$(wildcard ./.env.$(APP_ENV).local))
+  include ./.env.$(APP_ENV).local
+  export
+endif
 
 ifeq ($(APP_ENV),prod)
   DOCKER_COMPOSE=docker compose -f docker-compose.yml -f docker-compose.prod.yml
@@ -19,6 +33,7 @@ help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
 ## Docker ————————————————————————————————————————————————————————————
+
 
 start: build up ## Build and start the Docker containers.
 
